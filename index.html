@@ -7,7 +7,7 @@
     <meta name="author" content="I will get tableflipped">
     <title>I will get tableflipped</title>
     <link rel="shortcut icon" type="image/x-icon" href="https://cdn.discordapp.com/avatars/945974855956848652/30671b4bc0f01a6356e62b81978979a8.jpeg">
-    <link rel="stylesheet" href="/css.css">
+    <link rel="stylesheet" href="css.css">
     <script type="text/javascript">
         (function(c,l,a,r,i,t,y){
             c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
@@ -28,6 +28,12 @@
         <h3>By using this website, you acknowledge the use of cookies for site essential and analytic purposes, and you agree to the <a href="./privacy.html">privacy policy</a></h3>
         <button id="cookieaccept" class="bluehover">Accept</button> <button id="light" class="redhover">L</button> <button id="dark" class="redhover">D</button>
         <h3 style="margin-left: 250px; margin-top: 5px; color: grey;">Ctrl + D</h3>
+    </div>
+        <div id="pagebody">
+        <h3>I am I will get tableflipped. I like programming. This is a random site with information about various projects</h3>
+        <a href="https://github.com/Ill-tableflip-U"><img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png"></a>
+        <a href="http://discordapp.com/users/945974855956848652"><img src="https://assets-global.website-files.com/6257adef93867e50d84d30e2/636e0b5061df29d55a92d945_full_logo_blurple_RGB.svg"></a>
+        <a href="https://www.youtube.com/@iwillgettableflipped/"><img src="https://lh3.googleusercontent.com/3g4wDOiAnxbyAflNz4MhGxrkWw4vJ_kEtHTKQyqTx3o9hMBLmTIJha9ZmY87yu9mc8uM-u2OYCz6gPLx4V1o-fuV0ZHGFGenWGKV8tnPR2OvOMqIe2c=v0-s1050"></a>
     </div>
     <script>
         function getCookie(cookieName) {
@@ -103,6 +109,30 @@
                 }
             }
         });
+
+
+
+        const queryString = window.location.search;
+
+        // Parse the query string into an object
+        const urlParams = new URLSearchParams(queryString);
+
+        fetch(`/${urlParams.get('project')}`)
+        .then(response => {
+            if (!response.ok) {
+            throw new Error('Network response was not ok');
+            }
+            return response.text(); // Extract the response text (CSS content)
+        })
+        .then(cssContent => {
+        document.querySelector('#pagebody').innerHTML=cssContent
+        })
+        .catch(error => {
+            document.querySelector('#pagebody').innerHTML='<h1>There was a problem fetching the selected project.'
+        });
+
+
+
     </script>
 </body>
 </html>
