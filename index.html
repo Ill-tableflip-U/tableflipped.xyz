@@ -115,21 +115,21 @@
 
         // Parse the query string into an object
         const urlParams = new URLSearchParams(queryString);
-
-        fetch(`/${urlParams.get('project')}`)
-        .then(response => {
-            if (!response.ok) {
-            throw new Error('Network response was not ok');
-            }
-            return response.text(); // Extract the response text (CSS content)
-        })
-        .then(cssContent => {
-        document.querySelector('#pagebody').innerHTML=cssContent
-        })
-        .catch(error => {
-            document.querySelector('#pagebody').innerHTML='<h1>There was a problem fetching the selected project.'
-        });
-
+        if(urlParams.get('project')){
+            fetch(`/${urlParams.get('project')}`)
+            .then(response => {
+                if (!response.ok) {
+                throw new Error('Network response was not ok');
+                }
+                return response.text(); // Extract the response text (CSS content)
+            })
+            .then(cssContent => {
+            document.querySelector('#pagebody').innerHTML=cssContent
+            })
+            .catch(error => {
+                document.querySelector('#pagebody').innerHTML='<h1>There was a problem fetching the selected project.'
+            });
+        }
 
 
     </script>
