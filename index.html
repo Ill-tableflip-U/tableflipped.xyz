@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="My profile page!">
+    <meta name="author" content="I will get tableflipped">
+    <title>I will get tableflipped</title>
+    <link rel="shortcut icon" type="image/x-icon" href="https://cdn.discordapp.com/avatars/945974855956848652/30671b4bc0f01a6356e62b81978979a8.jpeg">
+    <link rel="stylesheet" href="css.css">
+    <script type="text/javascript">
+        (function(c,l,a,r,i,t,y){
+            c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+            t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+            y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+        })(window, document, "clarity", "script", "gqfhg71lrz");
+    </script>
+
+</head>
+<body class="white">
+    <div style="width: 100%; height: 100px; border-radius: 25px; display: flex; position: relative;" class="light">
+        <a href="/"><img src="https://cdn.discordapp.com/avatars/945974855956848652/30671b4bc0f01a6356e62b81978979a8.jpeg" style="border-radius: 20px; height: 90px; margin-top: 5px; margin-left: 5px;"></a>
+        <a href="/css.css" class="shortcut"><button>Contact</button></a>
+        <input style="border-radius: 20px; font-size: xx-large; width: 300px; height: 70px; margin-top: 14px; position: absolute; right: 0; margin-right: 10px; border-width: 0px;" type="text" class="white" placeholder="Search">
+    </div>
+    <div id="startmsg" class="light removed" style="position: absolute; bottom: 0; left: 50%; right: 0; width: 500px; height: 250px; transform: translate(-50%); margin-bottom: 50px; border-radius: 20px;">
+        <h1>Welcome to tableflipped.xyz</h1>
+        <h3>By using this website, you acknowledge the use of cookies for site essential and analytic purposes, and you agree to the <a href="./privacy.html">privacy policy</a></h3>
+        <button id="cookieaccept" class="bluehover">Accept</button> <button id="light" class="redhover">L</button> <button id="dark" class="redhover">D</button>
+        <h3 style="margin-left: 250px; margin-top: 5px; color: grey;">Ctrl + D</h3>
+    </div>
+    <script>
+        function getCookie(cookieName) {
+            const name = cookieName + "=";
+            const decodedCookie = decodeURIComponent(document.cookie);
+            const cookieArray = decodedCookie.split(';');
+
+            for (let i = 0; i < cookieArray.length; i++) {
+                let cookie = cookieArray[i];
+                while (cookie.charAt(0) === ' ') {
+                    cookie = cookie.substring(1);
+                }
+                if (cookie.indexOf(name) === 0) {
+                    return cookie.substring(name.length, cookie.length);
+                }
+            }
+            return null; // Return null if the cookie is not found
+        }
+
+        msg_accept = document.querySelector('#startmsg');
+        themecookie = getCookie('theme');
+        console.log(themecookie);
+        if (themecookie === 'D') {
+            Dtheme();
+        } else if (!themecookie) {
+            msg_accept.classList.remove('removed');
+        }
+
+        function setSessionCookie(cookieName, cookieValue) {
+            document.cookie = cookieName + "=" + cookieValue + ";path=/";
+        }
+
+        document.querySelector('#cookieaccept').addEventListener('click', () => {
+            msg_accept.classList.add("removed");
+        });
+
+        function Ltheme() {
+            document.querySelectorAll('.white').forEach((element) => {
+                element.classList.remove('dark');
+            });
+            document.querySelectorAll('.light').forEach((element) => {
+                element.classList.remove('black');
+            });
+            setSessionCookie("theme", "L");
+        }
+
+        function Dtheme() {
+            document.querySelectorAll('.white').forEach((element) => {
+                element.classList.add('dark');
+            });
+            document.querySelectorAll('.light').forEach((element) => {
+                element.classList.add('black');
+            });
+            setSessionCookie("theme", "D");
+        }
+
+        document.querySelector('#dark').addEventListener('click', () => {
+            Dtheme();
+        });
+
+        document.querySelector('#light').addEventListener('click', () => {
+            Ltheme();
+        });
+
+        document.addEventListener("keydown", (event) => {
+            if ((event.ctrlKey || event.metaKey) && event.key === "d") {
+                console.log('ssss');
+                event.preventDefault();
+                if (getCookie('theme') === 'D') {
+                    Ltheme();
+                } else {
+                    Dtheme();
+                }
+            }
+        });
+    </script>
+</body>
+</html>
