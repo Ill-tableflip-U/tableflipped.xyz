@@ -48,7 +48,7 @@
                     return cookie.substring(name.length, cookie.length);
                 }
             }
-            return null; // Return null if the cookie is not found
+            return null; 
         }
 
         msg_accept = document.querySelector('#startmsg');
@@ -112,7 +112,7 @@
 
         const queryString = window.location.search;
 
-        // Parse the query string into an object
+
         const urlParams = new URLSearchParams(queryString);
         if(urlParams.get('project')){
             fetch(`/${urlParams.get('project')}`)
@@ -120,13 +120,13 @@
                 if (!response.ok) {
                 throw new Error('Network response was not ok');
                 }
-                return response.text(); // Extract the response text (CSS content)
+                return response.text(); 
             })
-            .then(cssContent => {
-            document.querySelector('#pagebody').innerHTML=cssContent
+            .then(projectcontent => {
+            document.querySelector('#pagebody').innerHTML=projectcontent
             })
             .catch(error => {
-                document.querySelector('#pagebody').innerHTML='<h1>There was a problem fetching the selected project.'
+                document.querySelector('#pagebody').innerHTML='<h1>There was a problem fetching the selected project.</h1>'
             });
         }
 
