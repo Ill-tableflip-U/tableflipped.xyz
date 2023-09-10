@@ -1,4 +1,5 @@
-
+@font-face { font-family: "themefont"; src: url("/font.ttf") format("truetype"); }
+*{ font-family:themefont }
 .removed {
     transition: opacity 0.5s ease;
     opacity: 0;
