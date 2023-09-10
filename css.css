@@ -95,3 +95,11 @@
     margin-top: 30px;
     margin-left: 15px;
 }
+
+#profiles a{
+    color:red;
+}
+#profiles a svg{
+    height:60px;
+}
+    
