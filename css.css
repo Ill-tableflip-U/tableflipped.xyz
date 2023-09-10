@@ -1,10 +1,4 @@
-@font-face {
-  font-family: "themefont";
-  src: url("/font.ttf") format("truetype");
-}
-*{
-    font-family:themefont
-}
+
 .removed {
     transition: opacity 0.5s ease;
     opacity: 0;
@@ -95,4 +89,8 @@
     transform: translate(-50%);
     margin-bottom: 50px;
     border-radius: 20px;
+}
+#pagebody{
+    margin-top: 30px;
+    margin-left: 15px;
 }
