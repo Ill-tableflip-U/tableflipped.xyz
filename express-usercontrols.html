@@ -22,7 +22,8 @@
   <img class="p-img" src="https://cdn.discordapp.com/attachments/952105304194183218/1164346833854803978/collections.png"><br>
   3. <div class="cblock">$ npm install express-usercontrols</div><br>
   4. Get oauth2 credentials (get the client ID and the client secret), set the redirect URI to the url you will be running the express server on/yourcustomoauthroute/callback, for example https://tableflipped.xyz/discordoauth/callback. This module supports oauth2 for <a href="https://discord.com/developers/applications">discord</a>, <a href="https://portal.azure.com/#view/Microsoft_AAD_RegisteredApps/ApplicationsListBlade">microsoft</a>, <a href="https://console.cloud.google.com/apis/credentials">google</a> and <a href="https://github.com/settings/developers">github</a>.<br>
-  5. Enter the oauth2 credentials into     <br>
+  5. Start express-usercontrols. (For uneccessary fields enter null) <div class="cblock">const usercontrols = require("express-usercontrols") <br> usercontrols.initialise(app, errorfunction, login_redirect, loggedin_redirect, error_redirect, db, collection, userdata, stripe_secret, stripe_endpoint_secret, hcaptcha_secret)</div><br><br>
+  6. Enter the oauth2 credentials into their respective functions. <div class="cblock">usercontrols.discord_oauth2(app, url, route, clientId, clientSecret)<br>google_oauth2(app, url, route, clientId, clientSecret)<br>github_oauth2(app, url, route, clientId, clientSecret)<br>microsoft_oauth2(app, url, route, clientId, clientSecret)</div>    <br>
 
 
 </h3>
