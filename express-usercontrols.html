@@ -33,7 +33,7 @@ code {
   <ol>
    <li>Trigger stripe one-time payments within routes (optional) <br><code>stripe_bill(req,res,product,selfuser,quantity,unit_amount, url, successroute, cancelroute, userdata, voucher)</code></li>
    <li>Validate hcaptcha-protected forms from routes (optional) <br><code>app.post('/verify', validatecaptcha, async(req, res) =>{})</code></li>
-   <li>Check that a user is logged in and is unbanned on selected routes, and collect their updated user data. Optionally requiring them to have verified their phone number <br><code>example not written yet lmao because i am changing this one a bit (:</code></li>
+   <li>Check that a user is logged in and is unbanned on selected routes, and update their user data in req.session. Optionally requiring them to have verified their phone number <br><code>app.get('/dashboard', determineuser, async(req, res) =>{})</code></li>
   </ol>
 </h3>
 
