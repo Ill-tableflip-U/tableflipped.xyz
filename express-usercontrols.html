@@ -26,7 +26,9 @@ code {
   5. Start express-usercontrols. (For uneccessary fields enter null) <code>const usercontrols = require("express-usercontrols") <br> usercontrols.initialise(app, errorfunction, login_redirect, loggedin_redirect, error_redirect, db, collection, userdata, stripe_secret, stripe_endpoint_secret, hcaptcha_secret)</code><br><br>
   6. Enter the oauth2 credentials into their respective functions. <code>usercontrols.discord_oauth2(app, url, route, clientId, clientSecret)<br>google_oauth2(app, url, route, clientId, clientSecret)<br>github_oauth2(app, url, route, clientId, clientSecret)<br>microsoft_oauth2(app, url, route, clientId, clientSecret)</code><br>
   7. Set up sms verification with twilio/TWverify (optional) <code>usercontrols.sms_verify(app,url,authroute,authrouteverify,accountSid,authToken,verifySid, trial_balance)</code>
-  
-
+  Your express app should now be set up with express-usercontrols! You can now... 
+   1. Trigger stripe one-time payments within routes (optional) <code>stripe_bill(req,res,product,selfuser,quantity,unit_amount, url, successroute, cancelroute, userdata, voucher)</code>
+   2. Validate hcaptcha-protected forms from routes (optional) <code>app.post('/verify', validatecaptcha, async(req, res) =>{})</code>
+   3. Check that a user is logged in on certain routes, optionally requiring them to have verified their phone number (optional) <code>a</code>
 </h3>
 
