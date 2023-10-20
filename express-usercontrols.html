@@ -25,7 +25,7 @@ code {
   4. Get oauth2 credentials (get the client ID and the client secret), set the redirect URI to the url you will be running the express server on/yourcustomoauthroute/callback, for example https://tableflipped.xyz/discordoauth/callback. This module supports oauth2 for <a href="https://discord.com/developers/applications">discord</a>, <a href="https://portal.azure.com/#view/Microsoft_AAD_RegisteredApps/ApplicationsListBlade">microsoft</a>, <a href="https://console.cloud.google.com/apis/credentials">google</a> and <a href="https://github.com/settings/developers">github</a>.<br>
   5. Start express-usercontrols. (For uneccessary fields enter null) <code>const usercontrols = require("express-usercontrols") <br> usercontrols.initialise(app, errorfunction, login_redirect, loggedin_redirect, error_redirect, db, collection, userdata, stripe_secret, stripe_endpoint_secret, hcaptcha_secret)</code><br><br>
   6. Enter the oauth2 credentials into their respective functions. <code>usercontrols.discord_oauth2(app, url, route, clientId, clientSecret)<br>google_oauth2(app, url, route, clientId, clientSecret)<br>github_oauth2(app, url, route, clientId, clientSecret)<br>microsoft_oauth2(app, url, route, clientId, clientSecret)</code><br>
-  7. Set up sms verification (optional) <code>usercontrols.sms_verify(app,url,authroute,authrouteverify,accountSid,authToken,verifySid, trial_balance)</code>
+  7. Set up sms verification with twilio/TWverify (optional) <code>usercontrols.sms_verify(app,url,authroute,authrouteverify,accountSid,authToken,verifySid, trial_balance)</code>
   
 
 </h3>
