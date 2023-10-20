@@ -18,18 +18,22 @@ code {
 <br>
 <h2>Setup</h2>
 <h3>
-  1. <a href="https://www.mongodb.com/try/download/community">Install mongoDB community edition server</a> and <a href="https://www.mongodb.com/try/download/compass">mongoDB compass</a><br>
-  2. Create a new database with a name of your choice, and then 3 new collections. There MUST be a collection called phonebase, a collection called codes, and a collection with a name of your choice to store user data that you can use in your program later.
-  <br><img class="p-img" src="https://cdn.discordapp.com/attachments/952105304194183218/1164346834114854933/Screenshot_2023-10-19_103415.png">
-  <img class="p-img" src="https://cdn.discordapp.com/attachments/952105304194183218/1164346833854803978/collections.png"><br>
-  3. <code>$ npm install express-usercontrols</code><br>
-  4. Get oauth2 credentials (get the client ID and the client secret), set the redirect URI to the url you will be running the express server on/yourcustomoauthroute/callback, for example https://tableflipped.xyz/discordoauth/callback. This module supports oauth2 for <a href="https://discord.com/developers/applications">discord</a>, <a href="https://portal.azure.com/#view/Microsoft_AAD_RegisteredApps/ApplicationsListBlade">microsoft</a>, <a href="https://console.cloud.google.com/apis/credentials">google</a> and <a href="https://github.com/settings/developers">github</a>.<br>
-  5. Start express-usercontrols. (For uneccessary fields enter null)<br> <code>const usercontrols = require("express-usercontrols") <br> usercontrols.initialise(app, errorfunction, login_redirect, loggedin_redirect, error_redirect, db, collection, userdata, stripe_secret, stripe_endpoint_secret, hcaptcha_secret)</code><br><br>
-  6. Enter the oauth2 credentials into their respective functions. <br><code>usercontrols.discord_oauth2(app, url, route, clientId, clientSecret)<br>google_oauth2(app, url, route, clientId, clientSecret)<br>github_oauth2(app, url, route, clientId, clientSecret)<br>microsoft_oauth2(app, url, route, clientId, clientSecret)</code><br>
-  7. Set up sms verification with twilio/TWverify (optional) <br><code>usercontrols.sms_verify(app,url,authroute,authrouteverify,accountSid,authToken,verifySid, trial_balance)</code>
-  Your express app should now be set up with express-usercontrols! You can now... 
-   1. Trigger stripe one-time payments within routes (optional) <br><code>stripe_bill(req,res,product,selfuser,quantity,unit_amount, url, successroute, cancelroute, userdata, voucher)</code>
-   2. Validate hcaptcha-protected forms from routes (optional) <br><code>app.post('/verify', validatecaptcha, async(req, res) =>{})</code>
-   3. Check that a user is logged in on certain routes, optionally requiring them to have verified their phone number (optional) <br><code>a</code>
+  <ol>
+    <li><a href="https://www.mongodb.com/try/download/community">Install mongoDB community edition server</a> and <a href="https://www.mongodb.com/try/download/compass">mongoDB compass</a></li>
+    <li>Create a new database with a name of your choice, and then 3 new collections. There MUST be a collection called phonebase, a collection called codes, and a collection with a name of your choice to store user data that you can use in your program later.</li>
+    <br><img class="p-img" src="https://cdn.discordapp.com/attachments/952105304194183218/1164346834114854933/Screenshot_2023-10-19_103415.png">
+    <img class="p-img" src="https://cdn.discordapp.com/attachments/952105304194183218/1164346833854803978/collections.png"><br>
+    <li><code>$ npm install express-usercontrols</code></li>
+    <li>Get oauth2 credentials (get the client ID and the client secret), set the redirect URI to the url you will be running the express server on/yourcustomoauthroute/callback, for example https://tableflipped.xyz/discordoauth/callback. This module supports oauth2 for <a href="https://discord.com/developers/applications">discord</a>, <a href="https://portal.azure.com/#view/Microsoft_AAD_RegisteredApps/ApplicationsListBlade">microsoft</a>, <a href="https://console.cloud.google.com/apis/credentials">google</a> and <a href="https://github.com/settings/developers">github</a>.</li>
+    <li>Start express-usercontrols. (For uneccessary fields enter null)<br> <code>const usercontrols = require("express-usercontrols") <br> usercontrols.initialise(app, errorfunction, login_redirect, loggedin_redirect, error_redirect, db, collection, userdata, stripe_secret, stripe_endpoint_secret, hcaptcha_secret)</code></li>
+    <li>Enter the oauth2 credentials into their respective functions. <br><code>usercontrols.discord_oauth2(app, url, route, clientId, clientSecret)<br>google_oauth2(app, url, route, clientId, clientSecret)<br>github_oauth2(app, url, route, clientId, clientSecret)<br>microsoft_oauth2(app, url, route, clientId, clientSecret)</code></li>
+    <li>Set up sms verification with twilio/TWverify (optional) <br><code>usercontrols.sms_verify(app,url,authroute,authrouteverify,accountSid,authToken,verifySid, trial_balance)</code></li>
+  </ol>
+    Your express app should now be set up with express-usercontrols! You can now... 
+  <ol>
+   <li>Trigger stripe one-time payments within routes (optional) <br><code>stripe_bill(req,res,product,selfuser,quantity,unit_amount, url, successroute, cancelroute, userdata, voucher)</code></li>
+   <li>Validate hcaptcha-protected forms from routes (optional) <br><code>app.post('/verify', validatecaptcha, async(req, res) =>{})</code></li>
+   <li>Check that a user is logged in on certain routes, optionally requiring them to have verified their phone number (optional) <br><code>a</code></li>
+  </ol>
 </h3>
 
