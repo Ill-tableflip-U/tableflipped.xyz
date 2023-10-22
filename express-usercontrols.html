@@ -52,8 +52,9 @@
 <ol>
 
   
-    sms_verify() 
+
   <ul>
+      initialise()
       <table>
     <tr>
       <td>app</td>
@@ -91,10 +92,18 @@
       <td>Decimal</td>
     </tr>
   </table>
-
     
-  sms_verify()
-  <ul>
+    POST
+    <li>/verify - submits an SMS send request to the server. Form body: phonenumber, hcaptcha</li>
+    <li>/verify/callback - Attempts to verify the user's phone number with their code. Form body: auth_code, hcaptcha </li>
+    <li>/verify/remove - Removes the user's phone number from their profile. Form body: hcaptcha</li>
+    <li>/verify/skip - Cancels phone number verification. Form body: N/A</li>
+  
+  
+  
+  </ul>
+    <ul>
+      sms_verify()
       <table>
     <tr>
       <td>app</td>
@@ -143,6 +152,5 @@
   
   </ul>
     
-</li>
 </ol>
 
