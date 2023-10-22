@@ -2,14 +2,25 @@
   .p-img{
   height:120px;
   }
-code {
-  font-family: Consolas,"courier new";
-  color: crimson;
-  background-color: #f1f1f1;
-  padding: 2px;
-  font-size: 105%;
-  border-radius:5px;
-}
+  code {
+    font-family: Consolas,"courier new";
+    color: crimson;
+    background-color: #f1f1f1;
+    padding: 2px;
+    font-size: 105%;
+    border-radius:5px;
+  }
+
+  table {
+    border-collapse: collapse;
+  }
+
+  td {
+    border: 1px solid;
+    border-radius:5px;
+    padding: 10px;
+  }
+
 </style>
 <h1>express-usercontrols</h1>
 <h3>express-usercontrols is a module that interacts with express, to streamline login, payment and phone number verification while interacting with a local mongoDB server to efficiently store all user information.</h3>
@@ -27,7 +38,7 @@ code {
     <li>Get oauth2 credentials (get the client ID and the client secret), set the redirect URI to: server-url/yourcustomoauthroute/callback, for example https://tableflipped.xyz/discordoauth/callback. This module supports oauth2 for <a href="https://discord.com/developers/applications">discord</a>, <a href="https://portal.azure.com/#view/Microsoft_AAD_RegisteredApps/ApplicationsListBlade">microsoft</a>, <a href="https://console.cloud.google.com/apis/credentials">google</a> and <a href="https://github.com/settings/developers">github</a>.</li>
     <li>Start express-usercontrols. (For uneccessary fields enter null)<br> <code>const usercontrols = require("express-usercontrols") <br> usercontrols.initialise(app, errorfunction, login_redirect, loggedin_redirect, error_redirect, db, collection, userdata, stripe_secret, stripe_endpoint_secret, hcaptcha_secret)</code></li>
     <li>Enter the oauth2 credentials into their respective functions. <br><code>usercontrols.discord_oauth2(app, url, route, clientId, clientSecret)<br>google_oauth2(app, url, route, clientId, clientSecret)<br>github_oauth2(app, url, route, clientId, clientSecret)<br>microsoft_oauth2(app, url, route, clientId, clientSecret)</code></li>
-    <li>Set up sms verification with twilio/TWverify (optional) <br><code>usercontrols.sms_verify(app,url,authroute,authrouteverify,accountSid,authToken,verifySid, trial_balance)</code></li>
+    <li>Set up sms verification with twilio/TWverify (optional) <br><code>usercontrols.sms_verify(app,authroute,authrouteverify,accountSid,authToken,verifySid, trial_balance)</code></li>
   </ol>
     Your express app should now be set up with express-usercontrols! You can now... 
   <ol>
@@ -37,11 +48,91 @@ code {
   </ol>
   
 </h3>
-<h1>Routes</h1>
+<h1>Functions</h1>
 <ol>
-  <li>SMS verification
-    
+
+  
+    sms_verify() 
   <ul>
+      <table>
+    <tr>
+      <td>app</td>
+      <td>The express application in question</td>
+      <td>express()</td>
+    </tr>
+    <tr>
+      <td>authroute</td>
+      <td>The route of your phone number verification page</td>
+      <td>String</td>
+    </tr>
+    <tr>
+      <td>authrouteverify</td>
+      <td>The route of your phone number sms code entry page</td>
+      <td>String</td>
+    </tr>
+    <tr>
+      <td>accountSid</td>
+      <td>Your <a href="twilio.com">twilio</a> account Sid</td>
+      <td>String</td>
+    </tr>
+    <tr>
+      <td>authToken</td>
+      <td>Your <a href="twilio.com">twilio</a> auth token</td>
+      <td>String</td>
+    </tr>
+    <tr>
+      <td>verifySid</td>
+      <td>Your <a href="twilio.com">twilio</a> verify Sid</td>
+      <td>String</td>
+    </tr>
+    <tr>
+      <td>trial_balance</td>
+      <td>A free trial amount in dollars (or the currency defined in initialise() ) to be added to the user's account balance. set as 0 to disable. (optional parameter)</td>
+      <td>Decimal</td>
+    </tr>
+  </table>
+
+    
+  sms_verify()
+  <ul>
+      <table>
+    <tr>
+      <td>app</td>
+      <td>The express application in question</td>
+      <td>express()</td>
+    </tr>
+    <tr>
+      <td>authroute</td>
+      <td>The route of your phone number verification page</td>
+      <td>String</td>
+    </tr>
+    <tr>
+      <td>authrouteverify</td>
+      <td>The route of your phone number sms code entry page</td>
+      <td>String</td>
+    </tr>
+    <tr>
+      <td>accountSid</td>
+      <td>Your <a href="twilio.com">twilio</a> account Sid</td>
+      <td>String</td>
+    </tr>
+    <tr>
+      <td>authToken</td>
+      <td>Your <a href="twilio.com">twilio</a> auth token</td>
+      <td>String</td>
+    </tr>
+    <tr>
+      <td>verifySid</td>
+      <td>Your <a href="twilio.com">twilio</a> verify Sid</td>
+      <td>String</td>
+    </tr>
+    <tr>
+      <td>trial_balance</td>
+      <td>A free trial amount in dollars (or the currency defined in initialise() ) to be added to the user's account balance. set as 0 to disable. (optional parameter)</td>
+      <td>Decimal</td>
+    </tr>
+  </table>
+    
     POST
     <li>/verify - submits an SMS send request to the server. Form body: phonenumber, hcaptcha</li>
     <li>/verify/callback - Attempts to verify the user's phone number with their code. Form body: auth_code, hcaptcha </li>
