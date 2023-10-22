@@ -36,7 +36,7 @@
     <img class="p-img" src="https://cdn.discordapp.com/attachments/952105304194183218/1164346833854803978/collections.png"><br>
     <li><code>$ npm install express-usercontrols</code></li>
     <li>Get oauth2 credentials (get the client ID and the client secret), set the redirect URI to: server-url/yourcustomoauthroute/callback, for example https://tableflipped.xyz/discordoauth/callback. This module supports oauth2 for <a href="https://discord.com/developers/applications">discord</a>, <a href="https://portal.azure.com/#view/Microsoft_AAD_RegisteredApps/ApplicationsListBlade">microsoft</a>, <a href="https://console.cloud.google.com/apis/credentials">google</a> and <a href="https://github.com/settings/developers">github</a>.</li>
-    <li>Start express-usercontrols. (For uneccessary fields enter null)<br> <code>const usercontrols = require("express-usercontrols") <br> usercontrols.initialise(app, errorfunction, login_redirect, loggedin_redirect, error_redirect, db, collection, userdata, stripe_secret, stripe_endpoint_secret, hcaptcha_secret)</code></li>
+    <li>Start express-usercontrols. (For uneccessary fields enter null)<br> <code>const usercontrols = require("express-usercontrols") <br> usercontrols.initialise(app, errorfunction, login_redirect, loggedin_redirect, error_redirect, db, collection, userdata, currency, stripe_secret, stripe_endpoint_secret, hcaptcha_secret)</code></li>
     <li>Enter the oauth2 credentials into their respective functions. <br><code>usercontrols.discord_oauth2(app, url, route, clientId, clientSecret)<br>google_oauth2(app, url, route, clientId, clientSecret)<br>github_oauth2(app, url, route, clientId, clientSecret)<br>microsoft_oauth2(app, url, route, clientId, clientSecret)</code></li>
     <li>Set up sms verification with twilio/TWverify (optional) <br><code>usercontrols.sms_verify(app,authroute,authrouteverify,accountSid,authToken,verifySid, trial_balance)</code></li>
   </ol>
@@ -62,44 +62,60 @@
       <td>express()</td>
     </tr>
     <tr>
-      <td>authroute</td>
-      <td>The route of your phone number verification page</td>
+      <td>errorfunction</td>
+      <td>The function to be called when an error occurs, such as when authenticating a user. This should send an error page to the client</td>
+      <td>Function</td>
+    </tr>
+    <tr>
+      <td>login_redirect</td>
+      <td>The route of your user login page</td>
       <td>String</td>
     </tr>
     <tr>
-      <td>authrouteverify</td>
-      <td>The route of your phone number sms code entry page</td>
+      <td>loggedin_redirect</td>
+      <td>The route to redirect to upon successful user authentication</td>
       <td>String</td>
     </tr>
     <tr>
-      <td>accountSid</td>
-      <td>Your <a href="twilio.com">twilio</a> account Sid</td>
+      <td>db</td>
+      <td>The name of the mongoDB database to store everything on</td>
       <td>String</td>
     </tr>
     <tr>
-      <td>authToken</td>
-      <td>Your <a href="twilio.com">twilio</a> auth token</td>
+      <td>collection</td>
+      <td>The name of the collection to store the majority of user data inside</td>
       <td>String</td>
     </tr>
     <tr>
-      <td>verifySid</td>
-      <td>Your <a href="twilio.com">twilio</a> verify Sid</td>
+      <td>userdata</td>
+      <td>An object of custom data that will be written to each new user in the database</td>
+      <td>Object</td>
+    </tr>
+    <tr>
+      <td>currency</td>
+      <td>The currency you want to charge customers with in stripe</td>
       <td>String</td>
     </tr>
     <tr>
-      <td>trial_balance</td>
-      <td>A free trial amount in dollars (or the currency defined in initialise() ) to be added to the user's account balance. set as 0 to disable. (optional parameter)</td>
-      <td>Decimal</td>
+      <td>stripe_secret</td>
+      <td>Your Stripe secret to create checkout sessions and charge customers</td>
+      <td>String</td>
+    </tr>
+    <tr>
+      <td>stripe_endpoint_secret</td>
+      <td>Your Stripe endpoint secret to collect payment events</td>
+      <td>String</td>
+    </tr>
+    <tr>
+      <td>hcaptcha_secret</td>
+      <td>Your hcaptcha site key</td>
+      <td>String</td>
     </tr>
   </table>
-    
+    <div>
     POST
-    <li>/verify - submits an SMS send request to the server. Form body: phonenumber, hcaptcha</li>
-    <li>/verify/callback - Attempts to verify the user's phone number with their code. Form body: auth_code, hcaptcha </li>
-    <li>/verify/remove - Removes the user's phone number from their profile. Form body: hcaptcha</li>
-    <li>/verify/skip - Cancels phone number verification. Form body: N/A</li>
-  
-  
+    <li>/webhooks/stripe - your stripe webhook route</li>
+  </div>
   
   </ul>
     <ul>
@@ -141,13 +157,13 @@
       <td>Decimal</td>
     </tr>
   </table>
-    
+    <div>
     POST
     <li>/verify - submits an SMS send request to the server. Form body: phonenumber, hcaptcha</li>
     <li>/verify/callback - Attempts to verify the user's phone number with their code. Form body: auth_code, hcaptcha </li>
     <li>/verify/remove - Removes the user's phone number from their profile. Form body: hcaptcha</li>
     <li>/verify/skip - Cancels phone number verification. Form body: N/A</li>
-  
+  </div>
   
   
   </ul>
