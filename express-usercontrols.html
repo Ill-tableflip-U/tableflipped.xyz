@@ -241,5 +241,68 @@
   
   
   </ul>
+
+
+
+
+  <ul>
+      stripe_bill()
+      <table>
+    <tr>
+      <td>req</td>
+      <td>The req of the route calling the bill function</td>
+      <td>Object</td>
+    </tr>
+    <tr>
+      <td>res</td>
+      <td>res</td>
+      <td>Object</td>
+    </tr>
+    <tr>
+      <td>product</td>
+      <td>The stripe product ID to charge the customer with</td>
+      <td>String</td>
+    </tr>
+    <tr>
+      <td>Quantity</td>
+      <td>The "Credit" integer to append to the user's balance</td>
+      <td>Integer</td>
+    </tr>
+    <tr>
+      <td>unit_amount</td>
+      <td>The amount that the user should be charged for each 1 account credit</td>
+      <td>Integer</td>
+    </tr>
+      <tr>
+      <td>unit_amount</td>
+      <td>The amount that the user should be charged for each 1 account credit</td>
+      <td>Integer</td>
+    </tr>
+  <tr>
+      <td>successroute</td>
+      <td>Route to redirect to upon successful payment</td>
+      <td>String</td>
+    </tr>
+    <tr>
+      <td>cancelroute</td>
+      <td>Route to redirect to upon payment cancellation</td>
+      <td>String</td>
+    </tr>
+    <tr>
+      <td>voucher</td>
+      <td>Voucher object. includes vouchers and promo codes (without pins). It will look for them in the codes db collection. Object should include a code attribute, and a pin attribute ONLY if the db object has one.</td>
+      <td>Object</td>
+    </tr>
+      </table>
+    <div class="drop">
+    POST // UNFINISHED DO NOT USE
+    <li>/auth - Login form. Form body: email, password, hcaptcha</li>
+      <li>/auth/create - </li>
+      <li>/auth - Login form. Form body: email, password, hcaptcha</li>
+      <li>/auth - Login form. Form body: email, password, hcaptcha</li>
+  </div>
+  
+  
+  </ul>
 </ol>
 
