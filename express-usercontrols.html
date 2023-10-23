@@ -172,9 +172,74 @@
     <li>/verify/remove - Removes the user's phone number from their profile. Form body: hcaptcha</li>
     <li>/verify/skip - Cancels phone number verification. Form body: N/A</li>
   </div>
+  </ul>
+
+
+
+
+
+  
+      <ul>
+      *_oauth2() - google, github, discord, microsoft
+      <table>
+    <tr>
+      <td>route</td>
+      <td>The route to set to the selected oauth2 method sign in</td>
+      <td>String</td>
+    </tr>
+    <tr>
+      <td>clientId</td>
+      <td>The oauth2 method client ID outlined in step 3</td>
+      <td>String</td>
+    </tr>
+    <tr>
+      <td>clientSecret</td>
+      <td>The oauth2 method client secret outlined in step 3</td>
+      <td>String</td>
+    </tr>
+  </table>
+    <div class="drop">
+    GET
+    <li>/your-route - initiates a protected oauth2 session from the selected provider.</li>
+    </div>
+  </ul>
+
+
+
+  
+          <ul>
+      local_auth()
+      <table>
+    <tr>
+      <td>login_route</td>
+      <td>The route of your login page</td>
+      <td>String</td>
+    </tr>
+    <tr>
+      <td>auth_route</td>
+      <td>The route of your One Time Code email authentication page</td>
+      <td>String</td>
+    </tr>
+    <tr>
+      <td>err_fn</td>
+      <td>The function to call when a login error occurs - err_fn(message)</td>
+      <td>String</td>
+    </tr>
+    <tr>
+      <td>validate_email</td>
+      <td>The function that is called when an OTP (One Time Code) needs to be sent to a user via email - validate_email(email_address, OTP)</td>
+      <td>String</td>
+    </tr>
+  </table>
+    <div class="drop">
+    POST // UNFINISHED DO NOT USE
+    <li>/auth - Login form. Form body: email, password, hcaptcha</li>
+      <li>/auth/create - </li>
+      <li>/auth - Login form. Form body: email, password, hcaptcha</li>
+      <li>/auth - Login form. Form body: email, password, hcaptcha</li>
+  </div>
   
   
   </ul>
-    
 </ol>
 
