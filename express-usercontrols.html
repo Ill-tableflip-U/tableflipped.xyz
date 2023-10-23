@@ -33,12 +33,12 @@
 <h2>Setup</h2>
 <h3>
   <ol>
-    <li><a href="https://www.mongodb.com/try/download/community">Install mongoDB community edition server</a> and <a href="https://www.mongodb.com/try/download/compass">mongoDB compass</a></li>
+    <li><a  target="_blank" href="https://www.mongodb.com/try/download/community">Install mongoDB community edition server</a> and <a  target="_blank" href="https://www.mongodb.com/try/download/compass">mongoDB compass</a></li>
     `>Create a new database with a name of your choice, and then 3 new collections. There MUST be a collection called phonebase, a collection called codes, and a collection with a name of your choice to store user data that you can use in your program later.</li>
     <br><img class="p-img" src="https://cdn.discordapp.com/attachments/952105304194183218/1164346834114854933/Screenshot_2023-10-19_103415.png">
     <img class="p-img" src="https://cdn.discordapp.com/attachments/952105304194183218/1164346833854803978/collections.png"><br>
     <li><code>$ npm install express-usercontrols</code></li>
-    <li>Get oauth2 credentials (get the client ID and the client secret), set the redirect URI to: server-url/yourcustomoauthroute/callback, for example https://tableflipped.xyz/discordoauth/callback. This module supports oauth2 for <a href="https://discord.com/developers/applications">discord</a>, <a href="https://portal.azure.com/#view/Microsoft_AAD_RegisteredApps/ApplicationsListBlade">microsoft</a>, <a href="https://console.cloud.google.com/apis/credentials">google</a> and <a href="https://github.com/settings/developers">github</a>.</li>
+    <li>Get oauth2 credentials (get the client ID and the client secret), set the redirect URI to: server-url/yourcustomoauthroute/callback, for example https://tableflipped.xyz/discordoauth/callback. This module supports oauth2 for <a  target="_blank" href="https://discord.com/developers/applications">discord</a>, <a  target="_blank" href="https://portal.azure.com/#view/Microsoft_AAD_RegisteredApps/ApplicationsListBlade">microsoft</a>, <a  target="_blank" href="https://console.cloud.google.com/apis/credentials">google</a> and <a  target="_blank" href="https://github.com/settings/developers">github</a>.</li>
     <li>Start express-usercontrols. (For uneccessary fields enter null)<br> <code>const usercontrols = require("express-usercontrols") <br> usercontrols.initialise(express_app, app_url, mongodb_connect, errorfunction, login_redirect, loggedin_redirect, error_redirect, db, collection, userdata, currency, stripe_secret, stripe_endpoint_secret, hcaptcha_secret)</code></li>
     <li>Enter the oauth2 credentials into their respective functions. <br><code>usercontrols.discord_oauth2(route, clientId, clientSecret)<br>google_oauth2(route, clientId, clientSecret)<br>github_oauth2(route, clientId, clientSecret)<br>microsoft_oauth2(route, clientId, clientSecret)</code></li>
     <li>Set up sms verification with twilio/TWverify (optional) <br><code>usercontrols.sms_verify(authroute,authrouteverify,accountSid,authToken,verifySid, trial_balance)</code></li>
@@ -121,7 +121,7 @@
     </tr>
     <tr>
       <td>hcaptcha_secret</td>
-      <td>Your hcaptcha site key</td>
+      <td>Your hcaptcha secret</td>
       <td>String</td>
     </tr>
   </table>
@@ -146,17 +146,17 @@
     </tr>
     <tr>
       <td>accountSid</td>
-      <td>Your <a href="https://twilio.com">twilio</a> account Sid</td>
+      <td>Your <a  target="_blank" href="https://twilio.com">twilio</a> account Sid</td>
       <td>String</td>
     </tr>
     <tr>
       <td>authToken</td>
-      <td>Your <a href="https://twilio.com">twilio</a> auth token</td>
+      <td>Your <a  target="_blank" href="https://twilio.com">twilio</a> auth token</td>
       <td>String</td>
     </tr>
     <tr>
       <td>verifySid</td>
-      <td>Your <a href="https://twilio.com">twilio</a> verify Sid</td>
+      <td>Your <a  target="_blank" href="https://twilio.com">twilio</a> verify Sid</td>
       <td>String</td>
     </tr>
     <tr>
