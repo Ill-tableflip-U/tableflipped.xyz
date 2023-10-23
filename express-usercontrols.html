@@ -36,15 +36,15 @@
     <img class="p-img" src="https://cdn.discordapp.com/attachments/952105304194183218/1164346833854803978/collections.png"><br>
     <li><code>$ npm install express-usercontrols</code></li>
     <li>Get oauth2 credentials (get the client ID and the client secret), set the redirect URI to: server-url/yourcustomoauthroute/callback, for example https://tableflipped.xyz/discordoauth/callback. This module supports oauth2 for <a href="https://discord.com/developers/applications">discord</a>, <a href="https://portal.azure.com/#view/Microsoft_AAD_RegisteredApps/ApplicationsListBlade">microsoft</a>, <a href="https://console.cloud.google.com/apis/credentials">google</a> and <a href="https://github.com/settings/developers">github</a>.</li>
-    <li>Start express-usercontrols. (For uneccessary fields enter null)<br> <code>const usercontrols = require("express-usercontrols") <br> usercontrols.initialise(app, errorfunction, login_redirect, loggedin_redirect, error_redirect, db, collection, userdata, currency, stripe_secret, stripe_endpoint_secret, hcaptcha_secret)</code></li>
-    <li>Enter the oauth2 credentials into their respective functions. <br><code>usercontrols.discord_oauth2(app, url, route, clientId, clientSecret)<br>google_oauth2(app, url, route, clientId, clientSecret)<br>github_oauth2(app, url, route, clientId, clientSecret)<br>microsoft_oauth2(app, url, route, clientId, clientSecret)</code></li>
-    <li>Set up sms verification with twilio/TWverify (optional) <br><code>usercontrols.sms_verify(app,authroute,authrouteverify,accountSid,authToken,verifySid, trial_balance)</code></li>
+    <li>Start express-usercontrols. (For uneccessary fields enter null)<br> <code>const usercontrols = require("express-usercontrols") <br> usercontrols.initialise(express_app, app_url, mongodb_connect, errorfunction, login_redirect, loggedin_redirect, error_redirect, db, collection, userdata, currency, stripe_secret, stripe_endpoint_secret, hcaptcha_secret)</code></li>
+    <li>Enter the oauth2 credentials into their respective functions. <br><code>usercontrols.discord_oauth2(route, clientId, clientSecret)<br>google_oauth2(route, clientId, clientSecret)<br>github_oauth2(route, clientId, clientSecret)<br>microsoft_oauth2(route, clientId, clientSecret)</code></li>
+    <li>Set up sms verification with twilio/TWverify (optional) <br><code>usercontrols.sms_verify(authroute,authrouteverify,accountSid,authToken,verifySid, trial_balance)</code></li>
   </ol>
     Your express app should now be set up with express-usercontrols! You can now... 
   <ol>
-   <li>Trigger stripe one-time payments within routes (optional) <br><code>stripe_bill(req,res,product,selfuser,quantity,unit_amount, url, successroute, cancelroute, userdata, voucher)</code></li>
+   <li>Trigger stripe one-time payments within routes (optional) <br><code>stripe_bill(req,res,product, quantity,unit_amount, url, successroute, cancelroute, userdata, voucher)</code></li>
    <li>Validate hcaptcha-protected forms from routes (optional) <br><code>app.post('/verify', validatecaptcha, async(req, res) =>{})</code></li>
-   <li>Check that a user is logged in and is unbanned on selected routes, and update their user data in req.session. Optionally requiring them to have verified their phone number <br><code>app.get('/dashboard', determineuser(true), async(req, res) =>{}) - determineuser(requires-verified-phone)</code></li>
+   <li>Check that a user is logged in and is unbanned on selected routes, and update their user data in req.session. Optionally requiring them to have verified their phone number <br><code>app.get('/dashboard', determineuser(true), async(req, res) =>{}) </code> (Includes a parameter saying if user needs a verified phone)</li>
   </ol>
   
 </h3>
@@ -57,9 +57,19 @@
       initialise()
       <table>
     <tr>
-      <td>app</td>
+      <td>express_app</td>
       <td>The express application in question</td>
       <td>express()</td>
+    </tr>
+    <tr>
+      <td>app_url</td>
+      <td>The url of the express app</td>
+      <td>String</td>
+    </tr>
+    <tr>
+      <td>mongodb_connect</td>
+      <td>The mongoDB connection URL</td>
+      <td>String</td>
     </tr>
     <tr>
       <td>errorfunction</td>
@@ -121,11 +131,6 @@
     <ul>
       sms_verify()
       <table>
-    <tr>
-      <td>app</td>
-      <td>The express application in question</td>
-      <td>express()</td>
-    </tr>
     <tr>
       <td>authroute</td>
       <td>The route of your phone number verification page</td>
