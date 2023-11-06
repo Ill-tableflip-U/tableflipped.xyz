@@ -27,7 +27,7 @@
     <div id="startmsg" class="light removed" style="position: fixed; bottom: 0; left: 50%; right: 0; transform: translate(-50%); margin-bottom: 50px; border-radius: 20px;">
         <h1>Welcome to tableflipped.xyz</h1>
         <h3>By using this website, you acknowledge the use of cookies for site essential and analytic purposes, and you agree to the <a href="?project=privacy.html">Privacy policy</a></h3>
-        <button id="cookieaccept" class="bluehover">Accept</button> <button id="light" class="redhover">L</button> <button id="dark" class="redhover">D</button>
+        <button id="cookieaccept" onclick="msg_accept.classList.add("removed");setSessionCookie("theme", getCookie('theme')||"L");" class="bluehover">Accept</button> <button id="light" class="redhover">L</button> <button id="dark" class="redhover">D</button>
         <h3 style="margin-left: 250px; margin-top: 5px; color: grey;">Ctrl + D</h3>
     </div>
         <div id="pagebody">
@@ -72,9 +72,9 @@
             document.cookie = cookieName + "=" + cookieValue + ";path=/";
         }
 
-        document.querySelector('#cookieaccept').addEventListener('click', () => {
-            msg_accept.classList.add("removed");
-        });
+
+            
+
 
         function Ltheme() {
             document.querySelectorAll('.white').forEach((element) => {
