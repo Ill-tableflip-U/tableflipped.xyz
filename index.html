@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7922147746553099"
-     crossorigin="anonymous"></script>
+    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="My profile page!">
@@ -132,7 +131,13 @@
                 return response.text(); 
             })
             .then(projectcontent => {
-            document.querySelector('#pagebody').innerHTML=projectcontent
+                document.querySelector('#pagebody').innerHTML=projectcontent
+                let e_index = queryString.indexOf('.')
+                  if (e_index !== -1) {
+                    document.querySelector("title").innerText = queryString.substring(0, e_index);
+                  }else{
+                      document.querySelector("title").innerText = inputString;
+                  }
             })
             .catch(error => {
                 document.querySelector('#pagebody').innerHTML='<h1>There was a problem fetching the selected project.</h1>'
