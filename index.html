@@ -122,8 +122,9 @@
 
 
         const urlParams = new URLSearchParams(queryString);
-        if(urlParams.get('project')){
-            fetch(`/${urlParams.get('project')}`)
+        let p = urlParams.get('project');
+        if(p){
+            fetch(`/${p}`)
             .then(response => {
                 if (!response.ok) {
                 throw new Error('Network response was not ok');
@@ -132,9 +133,9 @@
             })
             .then(projectcontent => {
                 document.querySelector('#pagebody').innerHTML=projectcontent
-                let e_index = queryString.indexOf('.')
+                let e_index = p.indexOf('.')
                   if (e_index !== -1) {
-                    document.querySelector("title").innerText = queryString.substring(0, e_index);
+                    document.querySelector("title").innerText = p.substring(0, e_index);
                   }else{
                       document.querySelector("title").innerText = inputString;
                   }
