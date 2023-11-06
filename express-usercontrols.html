@@ -70,9 +70,14 @@
       <td>String</td>
     </tr>
     <tr>
-      <td>mongodb_connect</td>
-      <td>The mongoDB connection URL</td>
+      <td>session_secret</td>
+      <td>The session secret of the express app</td>
       <td>String</td>
+    </tr>
+    <tr>
+      <td>mongodb_connect</td>
+      <td>The mongoDB MongoClient object</td>
+      <td>MongoClient</td>
     </tr>
     <tr>
       <td>errorfunction</td>
@@ -90,19 +95,24 @@
       <td>String</td>
     </tr>
     <tr>
-      <td>db</td>
-      <td>The name of the mongoDB database to store everything on</td>
+      <td>error_redirect</td>
+      <td>The route to redirect to upon an authentication error</td>
       <td>String</td>
     </tr>
     <tr>
-      <td>collection</td>
-      <td>The name of the collection to store the majority of user data inside</td>
+      <td>db</td>
+      <td>The name of the mongoDB database to store everything on</td>
       <td>String</td>
     </tr>
     <tr>
       <td>userdata</td>
       <td>An object of custom data that will be written to each new user in the database</td>
       <td>Object</td>
+    </tr>
+    <tr>
+      <td>hcaptcha_secret</td>
+      <td>Your hcaptcha secret</td>
+      <td>String</td>
     </tr>
     <tr>
       <td>currency</td>
@@ -117,11 +127,6 @@
     <tr>
       <td>stripe_endpoint_secret</td>
       <td>Your Stripe endpoint secret to collect payment events</td>
-      <td>String</td>
-    </tr>
-    <tr>
-      <td>hcaptcha_secret</td>
-      <td>Your hcaptcha secret</td>
       <td>String</td>
     </tr>
   </table>
@@ -230,13 +235,24 @@
       <td>The function that is called when an OTP (One Time Code) needs to be sent to a user via email - validate_email(email_address, OTP)</td>
       <td>String</td>
     </tr>
+    <tr>
+      <td>encryption_key</td>
+      <td>The encryption key to use when encrypting user passwords in the database for added user security in case of a data breach and the users using the same passwords for literally everything. <code>WARNING: do not lose this or your program will not be able to access user passwords</code></td>
+      <td>String</td>
+    </tr>
+    <tr>
+      <td>encryption_iv</td>
+      <td>The encryption initialisation vector to use when encrypting user passwords in the database. <code>WARNING: do not lose this or your program will not be able to access user passwords </code></td>
+      <td>String</td>
+    </tr>
   </table>
     <div class="drop">
-    POST // UNFINISHED DO NOT USE
-    <li>/auth - Login form. Form body: email, password, hcaptcha</li>
-      <li>/auth/create - </li>
+    POST
       <li>/auth - Login form. Form body: email, password, hcaptcha</li>
-      <li>/auth - Login form. Form body: email, password, hcaptcha</li>
+      <li>/auth/create - Used to start creating a new account. Will redirect to email verification directly after. Form body: email, password, hcaptcha</li>
+      <li>/auth/authenticate - Used to authenticate One Time Codes emailed to users. Form body: auth_code, hcaptcha</li>
+      <li>/auth/change/email - Allows the user to change their email when signed in. Form body: email, hcaptcha</li>
+      <li>/auth/change/password - Allows users to attempt to reset their password when signed in. Form body: email, password, hcaptcha</li>
   </div>
   
   
@@ -264,7 +280,7 @@
       <td>String</td>
     </tr>
     <tr>
-      <td>Quantity</td>
+      <td>quantity</td>
       <td>The "Credit" integer to append to the user's balance</td>
       <td>Integer</td>
     </tr>
@@ -273,12 +289,7 @@
       <td>The amount that the user should be charged for each 1 account credit</td>
       <td>Integer</td>
     </tr>
-      <tr>
-      <td>unit_amount</td>
-      <td>The amount that the user should be charged for each 1 account credit</td>
-      <td>Integer</td>
-    </tr>
-  <tr>
+    <tr>
       <td>successroute</td>
       <td>Route to redirect to upon successful payment</td>
       <td>String</td>
