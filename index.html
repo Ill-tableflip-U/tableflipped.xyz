@@ -78,21 +78,21 @@
 
 
         function Ltheme() {
-            $('.white').forEach((element) => {
-                element.removeClass('dark');
+               $('.white').each(function() {
+                $(this).removeClass('dark');
             });
-            $('.light').forEach((element) => {
-                element.removeClass('black');
+            $('.light').each(function() {
+                $(this).removeClass('black');
             });
             setSessionCookie("theme", "L");
         }
 
         function Dtheme() {
-            $('.white').forEach((element) => {
-                element.addClass('dark');
+           $('.white').each(function() {
+                $(this).addClass('dark');
             });
-            $('.light').forEach((element) => {
-                element.addClass('black');
+            $('.light').each(function() {
+                $(this).addClass('black');
             });
             setSessionCookie("theme", "D");
         }
