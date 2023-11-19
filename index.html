@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="My profile page!">
@@ -27,7 +27,7 @@
     <div id="startmsg" class="light removed" style="position: fixed; bottom: 0; left: 50%; right: 0; transform: translate(-50%); margin-bottom: 50px; border-radius: 20px;">
         <h1>Welcome to tableflipped.xyz</h1>
         <h3>By using this website, you acknowledge the use of cookies for site essential and analytic purposes, and you agree to the <a href="?project=privacy.html">Privacy policy</a></h3>
-        <button id="cookieaccept" onclick='msg_accept.classList.add("removed");setSessionCookie("theme", getCookie("theme")||"L")' class="bluehover">Accept</button> <button id="light" class="redhover">L</button> <button id="dark" class="redhover">D</button>
+        <button id="cookieaccept" onclick='msg_accept.addClass("removed");setSessionCookie("theme", getCookie("theme")||"L")' class="bluehover">Accept</button> <button id="light" class="redhover">L</button> <button id="dark" class="redhover">D</button>
         <h3 style="margin-left: 250px; margin-top: 5px; color: grey;">Ctrl + D</h3>
     </div>
         <div id="pagebody">
@@ -60,13 +60,13 @@
             return null; 
         }
 
-        msg_accept = document.querySelector('#startmsg');
+        msg_accept = $('#startmsg');
         themecookie = getCookie('theme');
         console.log(themecookie);
         if (themecookie === 'D') {
             Dtheme();
         } else if (!themecookie) {
-            msg_accept.classList.remove('removed');
+            msg_accept.removeClass('removed');
         }
 
         function setSessionCookie(cookieName, cookieValue) {
@@ -78,30 +78,30 @@
 
 
         function Ltheme() {
-            document.querySelectorAll('.white').forEach((element) => {
-                element.classList.remove('dark');
+            $('.white').forEach((element) => {
+                element.removeClass('dark');
             });
-            document.querySelectorAll('.light').forEach((element) => {
-                element.classList.remove('black');
+            $('.light').forEach((element) => {
+                element.removeClass('black');
             });
             setSessionCookie("theme", "L");
         }
 
         function Dtheme() {
-            document.querySelectorAll('.white').forEach((element) => {
-                element.classList.add('dark');
+            $('.white').forEach((element) => {
+                element.addClass('dark');
             });
-            document.querySelectorAll('.light').forEach((element) => {
-                element.classList.add('black');
+            $('.light').forEach((element) => {
+                element.addClass('black');
             });
             setSessionCookie("theme", "D");
         }
 
-        document.querySelector('#dark').addEventListener('click', () => {
+        $('#dark').addEventListener('click', () => {
             Dtheme();
         });
 
-        document.querySelector('#light').addEventListener('click', () => {
+        $('#light').addEventListener('click', () => {
             Ltheme();
         });
 
@@ -133,16 +133,16 @@
                 return response.text(); 
             })
             .then(projectcontent => {
-                document.querySelector('#pagebody').innerHTML=projectcontent
+                $('#pagebody').innerHTML=projectcontent
                 let e_index = p.indexOf('.')
                   if (e_index !== -1) {
-                    document.querySelector("title").innerText = p.substring(0, e_index);
+                    $("title").innerText = p.substring(0, e_index);
                   }else{
-                      document.querySelector("title").innerText = inputString;
+                      $("title").innerText = inputString;
                   }
             })
             .catch(error => {
-                document.querySelector('#pagebody').innerHTML='<h1>There was a problem fetching the selected project.</h1>'
+                $('#pagebody').innerHTML='<h1>There was a problem fetching the selected project.</h1>'
             });
         }
 
