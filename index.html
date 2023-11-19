@@ -125,16 +125,16 @@ $(document).keydown(function(event) {
                 return response.text(); 
             })
             .then(projectcontent => {
-                $('#pagebody').innerHTML=projectcontent
+                $('#pagebody').html(projectcontent)
                 let e_index = p.indexOf('.')
                   if (e_index !== -1) {
-                    $("title").innerText = p.substring(0, e_index);
+                    $("title").html(p.substring(0, e_index))
                   }else{
-                      $("title").innerText = inputString;
+                      $("title").html(inputString)
                   }
             })
             .catch(error => {
-                $('#pagebody').innerHTML='<h1>There was a problem fetching the selected project.</h1>'
+                $('#pagebody').html('<h1>There was a problem fetching the selected project.</h1>')
             });
         }
 
