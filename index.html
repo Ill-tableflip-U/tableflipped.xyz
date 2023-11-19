@@ -27,7 +27,7 @@
     <div id="startmsg" class="light removed" style="position: fixed; bottom: 0; left: 50%; right: 0; transform: translate(-50%); margin-bottom: 50px; border-radius: 20px;">
         <h1>Welcome to tableflipped.xyz</h1>
         <h3>By using this website, you acknowledge the use of cookies for site essential and analytic purposes, and you agree to the <a href="?project=privacy.html">Privacy policy</a></h3>
-        <button id="cookieaccept" onclick='msg_accept.addClass("removed");setSessionCookie("theme", getCookie("theme")||"L")' class="bluehover">Accept</button> <button id="light" class="redhover">L</button> <button id="dark" class="redhover">D</button>
+        <button id="cookieaccept" onclick='msg_accept.addClass("removed");setSessionCookie("theme", getCookie("theme")||"L")' class="bluehover">Accept</button> <button id="light" onclick="Ltheme()" class="redhover">L</button> <button id="dark" onclick="Dtheme()" class="redhover">D</button>
         <h3 style="margin-left: 250px; margin-top: 5px; color: grey;">Ctrl + D</h3>
     </div>
         <div id="pagebody">
@@ -97,25 +97,17 @@
             setSessionCookie("theme", "D");
         }
 
-        $('#dark').addEventListener('click', () => {
-            Dtheme();
-        });
 
-        $('#light').addEventListener('click', () => {
+$(document).keydown(function(event) {
+    if ((event.ctrlKey || event.metaKey) && event.key === "d") {
+        event.preventDefault();
+        if (getCookie('theme') === 'D') {
             Ltheme();
-        });
-
-        document.addEventListener("keydown", (event) => {
-            if ((event.ctrlKey || event.metaKey) && event.key === "d") {
-                console.log('ssss');
-                event.preventDefault();
-                if (getCookie('theme') === 'D') {
-                    Ltheme();
-                } else {
-                    Dtheme();
-                }
-            }
-        });
+        } else {
+            Dtheme();
+        }
+    }
+});
 
 
 
