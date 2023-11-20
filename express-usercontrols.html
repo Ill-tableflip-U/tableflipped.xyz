@@ -8,7 +8,6 @@
   code {
     font-family: Consolas,"courier new";
     color: crimson;
-    background-color: #f1f1f1;
     padding: 2px;
     font-size: 105%;
     border-radius:5px;
@@ -37,17 +36,17 @@
     `>Create a new database with a name of your choice, and then 3 new collections. There MUST be a collection called users to store all user data, and a collection called codes if you are using ANY stripe billing functions</li>
     <br><img class="p-img" src="https://cdn.tableflipped.xyz/express-usercontrols/db-create-example.png">
     <img class="p-img" src="https://cdn.tableflipped.xyz/express-usercontrols/collections-example.png"><br>
-    <li><code>$ npm install express-usercontrols</code></li>
+    <li><code class="light">$ npm install express-usercontrols</code></li>
     <li>Get oauth2 credentials (get the client ID and the client secret), set the redirect URI to: server-url/yourcustomoauthroute/callback, for example https://tableflipped.xyz/discordoauth/callback. This module supports oauth2 for <a  target="_blank" href="https://discord.com/developers/applications">discord</a>, <a  target="_blank" href="https://portal.azure.com/#view/Microsoft_AAD_RegisteredApps/ApplicationsListBlade">microsoft</a>, <a  target="_blank" href="https://console.cloud.google.com/apis/credentials">google</a> and <a  target="_blank" href="https://github.com/settings/developers">github</a>.</li>
-    <li>Start express-usercontrols. (For uneccessary fields enter null)<br> <code>const usercontrols = require("express-usercontrols") <br> usercontrols.initialise(express_app, app_url, session_secret, mongodb_connect, errorfunction, login_redirect, loggedin_redirect, error_redirect, db, userdata, hcaptcha_secret, currency, stripe_secret, stripe_endpoint_secret)</code></li>
-    <li>Enter the oauth2 credentials into their respective functions. <br><code>usercontrols.discord_oauth2(route, clientId, clientSecret)<br>google_oauth2(route, clientId, clientSecret)<br>github_oauth2(route, clientId, clientSecret)<br>microsoft_oauth2(route, clientId, clientSecret)</code></li>
-    <li>Set up sms verification with twilio/TWverify (optional) <br><code>usercontrols.sms_verify(authroute,authrouteverify,accountSid,authToken,verifySid, trial_balance)</code></li>
+    <li>Start express-usercontrols. (For uneccessary fields enter null)<br> <code class="light">const usercontrols = require("express-usercontrols") <br> usercontrols.initialise(express_app, app_url, session_secret, mongodb_connect, errorfunction, login_redirect, loggedin_redirect, error_redirect, db, userdata, hcaptcha_secret, currency, stripe_secret, stripe_endpoint_secret)</code></li>
+    <li>Enter the oauth2 credentials into their respective functions. <br><code class="light">usercontrols.discord_oauth2(route, clientId, clientSecret)<br>google_oauth2(route, clientId, clientSecret)<br>github_oauth2(route, clientId, clientSecret)<br>microsoft_oauth2(route, clientId, clientSecret)</code></li>
+    <li>Set up sms verification with twilio/TWverify (optional) <br><code class="light">usercontrols.sms_verify(authroute,authrouteverify,accountSid,authToken,verifySid, trial_balance)</code></li>
   </ol>
     Your express app should now be set up with express-usercontrols! You can now... 
   <ol>
-   <li>Trigger stripe one-time payments within routes (optional) <br><code>stripe_bill(req, res, product, quantity, unit_amount, successroute, cancelroute, voucher)</code></li>
-   <li>Validate hcaptcha-protected forms from routes (optional) <br><code>app.post('/verify', validatecaptcha, async(req, res) =>{})</code></li>
-   <li>Check that a user is logged in and is unbanned on selected routes, and return their up-to-date user object in req.user. Optionally requiring them to have verified their phone number <br><code>app.get('/dashboard', determineuser(true), async(req, res) =>{}) </code> (Includes a parameter saying if user needs a verified phone)</li>
+   <li>Trigger stripe one-time payments within routes (optional) <br><code class="light">stripe_bill(req, res, product, quantity, unit_amount, successroute, cancelroute, voucher)</code></li>
+   <li>Validate hcaptcha-protected forms from routes (optional) <br><code class="light">app.post('/verify', validatecaptcha, async(req, res) =>{})</code></li>
+   <li>Check that a user is logged in and is unbanned on selected routes, and return their up-to-date user object in req.user. Optionally requiring them to have verified their phone number <br><code class="light">app.get('/dashboard', determineuser(true), async(req, res) =>{}) </code> (Includes a parameter saying if user needs a verified phone)</li>
   </ol>
   
 </h3>
@@ -237,12 +236,12 @@
     </tr>
     <tr>
       <td>encryption_key</td>
-      <td>The 32 byte encryption key to use when encrypting user passwords in the database for added user security in case of a data breach and the users using the same passwords for literally everything. <code>WARNING: do not lose this or your program will not be able to access user passwords</code></td>
+      <td>The 32 byte encryption key to use when encrypting user passwords in the database for added user security in case of a data breach and the users using the same passwords for literally everything. <code class="light">WARNING: do not lose this or your program will not be able to access user passwords</code></td>
       <td>String</td>
     </tr>
     <tr>
       <td>encryption_iv</td>
-      <td>The 16 byte encryption initialisation vector to use when encrypting user passwords in the database. <code>WARNING: do not lose this or your program will not be able to access user passwords </code></td>
+      <td>The 16 byte encryption initialisation vector to use when encrypting user passwords in the database. <code class="light">WARNING: do not lose this or your program will not be able to access user passwords </code></td>
       <td>String</td>
     </tr>
   </table>
