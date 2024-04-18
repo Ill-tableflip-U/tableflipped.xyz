@@ -124,7 +124,7 @@
         let p = urlParams.get('project');
         if (!p.includes(".")) { p += ".html" }
         if (p) {
-            $.get(`/pages/${p}`, function (project) {
+            $.get(`/${p}`, function (project) {
 
                 $('#pagebody').html(project.responseText)
                 let e_index = p.indexOf('.')
