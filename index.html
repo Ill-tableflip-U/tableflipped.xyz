@@ -126,7 +126,7 @@
         if (p) {
             $.get(`/pages/${p}`, function (project) {
 
-                $('#pagebody').html(project)
+                $('#pagebody').html(project.responseText)
                 let e_index = p.indexOf('.')
                 if (e_index !== -1) {
                     $("title").html(p.substring(0, e_index))
