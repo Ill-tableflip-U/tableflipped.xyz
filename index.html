@@ -112,7 +112,7 @@ $(document).keydown(function(event) {
         let p = urlParams.get('project');
         if(!p.includes(".")){p+=".html"}
         if(p){
-            fetch(`/${p}`)
+            fetch(`/pages/${p}`)
             .then(response => {
                 if (!response.ok) {
                 throw new Error('Network response was not ok');
