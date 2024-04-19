@@ -1,0 +1,438 @@
+<h1>express-usercontrols 1.2</h1>
+<h3>express-usercontrols is a module that interacts with express to streamline login, payment and phone number
+    verification while interacting with a mongoDB server to efficiently store all user information.</h3>
+<br>
+<br>
+<br>
+<h2>Setup</h2>
+<h3>
+    <ol>
+        <li><a target="_blank" href="https://www.mongodb.com/try/download/community">Install mongoDB community edition
+                server</a> and <a target="_blank" href="https://www.mongodb.com/try/download/compass">mongoDB
+                compass</a></li>
+        Create a new database with a name of your choice, and then 1 new collection. This collection MUST be called
+        "users", to store all user data.</li>
+        <br><img class="p-img" src="https://cdn.tableflipped.xyz/express-usercontrols/db-create-example.png">
+        <img class="p-img" src="https://cdn.tableflipped.xyz/express-usercontrols/collections-example.png"><br>
+        <li>
+            <pre class="code-container light">
+                <button class="copy" onclick="window.copycode(this)">Copy 📋</button>
+        
+                <code>npm install express-usercontrols@1.2.3</code>
+            </pre>
+        </li>
+        <li>Get oauth2 credentials (get the client ID and the client secret), set the redirect URI to:
+            server-url/auth/auth-provider-name/callback, for example https://tableflipped.xyz/auth/discord/callback.
+            This module supports oauth2 for <a target="_blank"
+                href="https://discord.com/developers/applications">discord</a>, <a target="_blank"
+                href="https://portal.azure.com/#view/Microsoft_AAD_RegisteredApps/ApplicationsListBlade">microsoft </a>,
+            <a target="_blank" href="https://console.cloud.google.com/apis/credentials">google</a> and <a
+                target="_blank" href="https://github.com/settings/developers">github</a>, as well as an option for a
+            bring your own OAuth2 method (It has to be compatible with <a target="_blank"
+                href="https://passportjs.org">passportjs</a>).
+        </li>
+
+        <li>Start express-usercontrols. (For uneccessary fields enter null)<br>
+            <pre class="code-container light">
+                <button class="copy" onclick="window.copycode(this)">Copy 📋</button>
+            
+                <code>const usercontrols = require("express-usercontrols")
+usercontrols.initialise({
+    express_app:app, //The express application instance
+    app_url: "http://localhost", //The express application hostname 
+    errorfunction: displayerror, //The function to display static errors(res, status_code, message),
+    login_redirect: "/login-page", //The login page route
+    loggedin_redirect: "/account", //The route to go to once logged in
+    error_redirect: "/auth-error", //The authentication error route
+    mongodb_connect_uri: "mongodb://localhost:27017", //The MongoDB connection string
+    db: "mycooldatabase", //The MongoDB database to use
+    userdata: {}, //Other deafult data to add to each user in the database under "data"
+    hcaptcha_secret: 'secret_key', //Your hcaptcha secret key (for email/password login)
+    currency: "AUD", //The currency to charge customers with (optional, for stripe integration)
+    stripe_secret: stripe_secret, //Stripe secret key (optional)
+    stripe_endpoint_secret: stripe_endpoint_secret, //Stripe endpoint secret (optional)
+});</code>
+            </pre>
+
+        <li>
+            Enter the oauth2 credentials into their respective functions.
+            <pre class="code-container light">
+                <button class="copy" onclick="window.copycode(this)">Copy 📋</button>
+            
+                <code>usercontrols.discord_oauth2(clientId, clientSecret)
+usercontrols.google_oauth2(clientId, clientSecret)
+usercontrols.github_oauth2(clientId, clientSecret)
+usercontrols.microsoft_oauth2(clientId, clientSecret)</code>
+            </pre>
+        </li>
+        <li>Set up sms verification with twilio/TWverify (optional)
+            <pre class="code-container light">
+                <button class="copy" onclick="window.copycode(this)">Copy 📋</button>
+            
+                <code>usercontrols.sms_verify(authroute,authrouteverify,accountSid,authToken,verifySid, trial_balance)</code>
+            </pre>
+        </li>
+    </ol>
+    Your express app should now be set up with express-usercontrols! You can now...
+    <ol>
+        <li>Trigger stripe one-time payments within routes (optional)
+            <pre class="code-container light">
+                <button class="copy" onclick="window.copycode(this)">Copy 📋</button>
+            
+                <code>stripe_bill(req, res, product, quantity, unit_amount, successroute, cancelroute, voucher)</code>
+            </pre>
+        </li>
+        <li>Validate hcaptcha-protected forms from routes (optional)
+            <pre class="code-container light">
+                <button class="copy" onclick="window.copycode(this)">Copy 📋</button>
+            
+                <code>app.post('/validated-captcha-route', validatecaptcha, async(req, res) =>{})</code>
+            </pre>
+        </li>
+        <li>Check that a user is logged in and is unbanned on selected routes, and return their up-to-date user object
+            in req.session.user. Optionally requiring them to have verified their phone number
+            <pre class="code-container light">
+                <button class="copy" onclick="window.copycode(this)">Copy 📋</button>
+                
+                <code>app.get('/dashboard', determineuser(false), async(req, res) =>{})</code>
+            </pre> determineuser(if user needs a verified phone to continue)
+        </li>
+    </ol>
+
+</h3>
+<script>
+    hljs.highlightAll();</script>
+<h1>Functions</h1>
+<ol>
+
+
+
+    <ul>
+        initialise()
+        <table>
+            <tr>
+                <td>config</td>
+                <td>
+                    <table>
+                        <tr>
+                            <td>express_app</td>
+                            <td>The express application in question</td>
+                            <td>express()</td>
+                        </tr>
+                        <tr>
+                            <td>app_url</td>
+                            <td>The url of the express app</td>
+                            <td>String</td>
+                        </tr>
+                        <tr>
+                            <td>session_secret</td>
+                            <td>The session secret of the express app</td>
+                            <td>String</td>
+                        </tr>
+                        <tr>
+                            <td>mongodb_connect</td>
+                            <td>The mongoDB MongoClient object</td>
+                            <td>MongoClient</td>
+                        </tr>
+                        <tr>
+                            <td>errorfunction</td>
+                            <td>The function to be called when an error occurs, such as when authenticating a user. This
+                                should send
+                                an error page to the client</td>
+                            <td>Function</td>
+                        </tr>
+                        <tr>
+                            <td>login_redirect</td>
+                            <td>The route of your user login page</td>
+                            <td>String</td>
+                        </tr>
+                        <tr>
+                            <td>loggedin_redirect</td>
+                            <td>The route to redirect to upon successful user authentication</td>
+                            <td>String</td>
+                        </tr>
+                        <tr>
+                            <td>error_redirect</td>
+                            <td>The route to redirect to upon an authentication error</td>
+                            <td>String</td>
+                        </tr>
+                        <tr>
+                            <td>db</td>
+                            <td>The name of the mongoDB database to store everything on</td>
+                            <td>String</td>
+                        </tr>
+                        <tr>
+                            <td>userdata</td>
+                            <td>An object of custom data that will be written to each new user in the database</td>
+                            <td>Object</td>
+                        </tr>
+                        <tr>
+                            <td>hcaptcha_secret</td>
+                            <td>Your hcaptcha secret</td>
+                            <td>String</td>
+                        </tr>
+                        <tr>
+                            <td>currency</td>
+                            <td>The currency you want to charge customers with in stripe</td>
+                            <td>String</td>
+                        </tr>
+                        <tr>
+                            <td>stripe_secret</td>
+                            <td>Your Stripe secret to create checkout sessions and charge customers</td>
+                            <td>String</td>
+                        </tr>
+                        <tr>
+                            <td>stripe_endpoint_secret</td>
+                            <td>Your Stripe endpoint secret to collect payment events</td>
+                            <td>String</td>
+                        </tr>
+                    </table>
+                </td>
+                <td>Object</td>
+            </tr>
+        </table>
+        <div class="drop">
+            POST
+            <li>/webhooks/stripe - your stripe webhook route</li>
+        </div>
+
+    </ul>
+    <ul>
+        sms_verify()
+        <table>
+            <tr>
+                <td>authroute</td>
+                <td>The route of your phone number verification page</td>
+                <td>String</td>
+            </tr>
+            <tr>
+                <td>authrouteverify</td>
+                <td>The route of your phone number sms code entry page</td>
+                <td>String</td>
+            </tr>
+            <tr>
+                <td>accountSid</td>
+                <td>Your <a target="_blank" href="https://twilio.com">twilio</a> account Sid</td>
+                <td>String</td>
+            </tr>
+            <tr>
+                <td>authToken</td>
+                <td>Your <a target="_blank" href="https://twilio.com">twilio</a> auth token</td>
+                <td>String</td>
+            </tr>
+            <tr>
+                <td>verifySid</td>
+                <td>Your <a target="_blank" href="https://twilio.com">twilio</a> verify Sid</td>
+                <td>String</td>
+            </tr>
+            <tr>
+                <td>trial_balance</td>
+                <td>A free trial amount in dollars (or the currency defined in initialise() ) to be added to the user's
+                    account balance. set as 0 to disable. (optional parameter)</td>
+                <td>Decimal</td>
+            </tr>
+        </table>
+        <div class="drop">
+            POST
+            <li>/verify - submits an SMS send request to the server. Form body: phonenumber, hcaptcha</li>
+            <li>/verify/callback - Attempts to verify the user's phone number with their code. Form body: auth_code,
+                hcaptcha </li>
+            <li>/verify/remove - Removes the user's phone number from their profile. Form body: hcaptcha</li>
+            <li>/verify/skip - Cancels phone number verification. Form body: N/A</li>
+        </div>
+    </ul>
+
+
+
+
+
+
+    <ul>
+        *_oauth2() - google, github, discord, microsoft
+        <table>
+            <tr>
+                <td>clientId</td>
+                <td>The oauth2 method client ID outlined in step 3</td>
+                <td>String</td>
+            </tr>
+            <tr>
+                <td>clientSecret</td>
+                <td>The oauth2 method client secret outlined in step 3</td>
+                <td>String</td>
+            </tr>
+        </table>
+        <div class="drop">
+            GET
+            <li>/auth/auth-provider-name (github/google/discord/microsoft) - initiates an oauth2 route for the selected provider.</li>
+        </div>
+    </ul>
+
+
+    <ul>
+        oauth2()
+        <table>
+            <tr>
+                <td>package-name</td>
+                <td>The name of the other OAuth2 package (must be compatible with passportjs) to use.</td>
+                <td>String</td>
+            </tr>
+            <tr>
+                <td>provider-name</td>
+                <td>The name of the provider as used in the oauth2 package.</td>
+                <td>String</td>
+            </tr>
+            <tr>
+                <td>scope</td>
+                <td>The array of scopes to use in the oauth2.</td>
+                <td>Array</td>
+            </tr>
+            <tr>
+                <td>clientId</td>
+                <td>The oauth2 method client ID outlined in step 3</td>
+                <td>String</td>
+            </tr>
+            <tr>
+                <td>clientSecret</td>
+                <td>The oauth2 method client secret outlined in step 3</td>
+                <td>String</td>
+            </tr>
+            <tr>
+                <td>db_format</td>
+                <td>The format of which the json from the oauth provider is in, to be converted to the format required by the database.</td>
+                <td>Object</td>
+            </tr>
+
+        </table>
+        <div class="drop">
+            GET
+            <li>/auth/auth-provider-name (github/google/discord/microsoft) - initiates an oauth2 route for the selected provider.</li>
+        </div>
+    </ul>
+
+    <ul>
+        local_auth()
+        <table>
+            <tr>
+                <td>validate_email</td>
+                <td>The function that is called when an OTP (One Time Code) needs to be sent to a user via email -
+                    validate_email(email_address, OTP)</td>
+                <td>Function</td>
+            </tr>
+            <tr>
+                <td>default_mfa</td>
+                <td>The default mfa method for new users - "email" or null</td>
+                <td>String</td>
+            </tr>
+            <tr>
+                <td>auth_route</td>
+                <td>The route of your OTP (One Time Code) authentication page (if applicable) (for redirects, if json
+                    responses are being used, set to null)</td>
+                <td>String</td>
+            </tr>
+            <tr>
+                <td>secret</td>
+                <td>The password hashing secret to use when storing user passwords in the database.
+                    <code
+                        class="light">WARNING: do not lose this or your program will not be able to access user passwords, leading to a catastrophic failure of the login system </code>
+                </td>
+                <td>String</td>
+            </tr>
+        </table>
+        <div class="drop">
+            POST
+            <li>/auth - Login form. Form body: email, password, hcaptcha</li>
+            <li>/auth/create - Used to start creating a new account. Will redirect to email verification directly after.
+                Form body: email, password, hcaptcha</li>
+            <li>/auth/authenticate - Used to authenticate One Time Codes emailed to users. Form body: auth_code,
+                hcaptcha</li>
+            <li>/auth/change/email - Allows the user to change their email when signed in. Form body: email, hcaptcha
+            </li>
+            <li>/auth/change/password - Allows users to attempt to reset their password when signed in. Form body:
+                email, password, hcaptcha</li>
+        </div>
+
+
+    </ul>
+
+
+
+
+    <ul>
+        stripe_bill()
+        <table>
+            <tr>
+                <td>req</td>
+                <td>The req of the route calling the bill function</td>
+                <td>Object</td>
+            </tr>
+            <tr>
+                <td>res</td>
+                <td>res</td>
+                <td>Object</td>
+            </tr>
+            <tr>
+                <td>product</td>
+                <td>The stripe product ID to charge the customer with</td>
+                <td>String</td>
+            </tr>
+            <tr>
+                <td>quantity</td>
+                <td>The quantity of the item to charge for</td>
+                <td>Integer</td>
+            </tr>
+            <tr>
+                <td>unit_amount</td>
+                <td>The amount that the user should be charged for each item (in cents)</td>
+                <td>Integer</td>
+            </tr>
+            <tr>
+                <td>successroute</td>
+                <td>Route to redirect to upon successful payment</td>
+                <td>String</td>
+            </tr>
+            <tr>
+                <td>cancelroute</td>
+                <td>Route to redirect to upon payment cancellation</td>
+                <td>String</td>
+            </tr>
+            <tr>
+                <td>voucher</td>
+                <td>Voucher object. includes vouchers and promo codes (without pins). It will look for them in the codes
+                    db collection. Object should include a code attribute, and a pin attribute ONLY if the db object has
+                    one.</td>
+                <td>Object</td>
+            </tr>
+        </table>
+        <div class="drop">
+            No routes created
+        </div>
+
+
+    </ul>
+</ol>
+<h1>Middleware</h1>
+<ol>
+    <ul>
+        determineuser(phone_verify)
+        <table>
+
+            <tr>
+                <td>phone_verify</td>
+                <td>Whether the phone number needs to be verified to access the selected route. Redirects to the phone
+                    verification page if so.</td>
+                <td>Boolean</td>
+            </tr>
+        </table>
+
+
+
+    </ul>
+    <ul>
+        validatecaptcha
+        Validates a captcha on the form.
+
+
+
+    </ul>
+
+</ol>
