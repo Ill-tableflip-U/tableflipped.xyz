@@ -1,134 +1,158 @@
-       @font-face { font-family: "themefont"; src: url("font.ttf") format("truetype"); }
-*:not(code){ font-family:themefont }
+@font-face {
+  font-family: "themefont";
+  src: url("font.ttf") format("truetype");
+}
+*:not(code) > *:not(code) {
+  font-family: themefont;
+}
 
-  .p-img{
-  height:120px;
-  }
-  .drop{
-    padding:15px;
-  }
-  code {
-    font-family: Consolas,"courier new";
-    color: crimson;
-    padding: 2px;
-    font-size: 105%;
-    border-radius:5px;
-  }
+.p-img {
+  height: 120px;
+}
+.drop {
+  padding: 15px;
+}
 
-  table {
-    border-collapse: collapse;
-  }
+table {
+  border-collapse: collapse;
+}
 
-  td {
-    border: 1px solid;
-    border-radius:5px;
-    padding: 10px;
-  }
+td {
+  border: 1px solid;
+  border-radius: 5px;
+  padding: 10px;
+}
 
+.code-container {
+  border-radius: 20px;
+  user-select: none;
+  width: fit-content;
+}
 
+code {
+  border-radius: 20px;
+  margin-bottom: -50px;
+  margin-top: -40px;
+  user-select: text;
+}
 
-
+.copy {
+  background-color: transparent;
+  border-radius: 5px;
+  margin-top: 8px;
+  margin-left: -50px;
+}
 
 .removed {
-    transition: opacity 0.5s ease;
-    opacity: 0;
-    pointer-events: none;
+  transition: opacity 0.5s ease;
+  opacity: 0;
+  pointer-events: none;
 }
 .displayed {
-    transition: opacity 0.5s ease;
-    opacity: 1;
+  transition: opacity 0.5s ease;
+  opacity: 1;
 }
 .light {
-    -webkit-transition: 1.5s ease;
-    transition: 0.5s ease;
-    background-color: rgb(206, 206, 206);
-    color: dark;
+  -webkit-transition: 1.5s ease;
+  transition: 0.5s ease;
+  background-color: rgb(206, 206, 206);
+  color: dark;
 }
 .black {
-    transition: 0.5s ease;
-    background-color: rgb(50, 50, 50);
-    color: white;
-    border-color: red;
-    border-width: 4px;
+  transition: 0.5s ease;
+  background-color: rgb(50, 50, 50);
+  color: white;
+  border-color: red;
+  border-width: 4px;
 }
 .white {
-    transition: 0.5s ease;
-    background-color: white;
+  transition: 0.5s ease;
+  background-color: white;
 }
 .dark {
-    transition: 0.5s ease;
-    background-color: rgb(0, 0, 24);
-    color: white;
+  transition: 0.5s ease;
+  background-color: rgb(31, 31, 31);
+  color: white;
 }
 .shortcut button {
-    background-color: transparent;
-    border: none;
-    cursor: pointer;
-    font-size: xx-large;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: xx-large;
 }
 .shortcut:hover {
-    background-color: rgb(137, 208, 232);
+  background-color: rgb(137, 208, 232);
 }
 .shortcut {
-    margin-top: 8px;
-    border-radius: 20px;
-    margin-left: 50px;
-    padding-top: 25px;
-    height: 60%;
-    padding-left: 10px;
-    padding-right: 10px;
-    transition: background-color 0.5s ease-out;
+  margin-top: 8px;
+  border-radius: 20px;
+  margin-left: 50px;
+  padding-top: 25px;
+  height: 60%;
+  padding-left: 10px;
+  padding-right: 10px;
+  transition: background-color 0.5s ease-out;
 }
 #startmsg > * {
-    margin-left: 20px;
-    margin-right: 20px;
+  margin-left: 20px;
+  margin-right: 20px;
 }
 .bluehover {
-    background-color: transparent;
-    border-color: blue;
-    border-width: 5px;
-    border-radius: 20px;
-    font-size: xx-large;
-    width: 150px;
-    height: 50px;
-    transition: background-color 0.5s ease-out;
+  background-color: transparent;
+  border-color: blue;
+  border-width: 5px;
+  border-radius: 20px;
+  font-size: xx-large;
+  width: 150px;
+  height: 50px;
+  transition: background-color 0.5s ease-out;
 }
 .bluehover:hover {
-    background-color: rgb(60, 187, 229);
+  background-color: rgb(60, 187, 229);
 }
 .redhover {
-    border-color: red;
-    background-color: transparent;
-    border-width: 5px;
-    border-radius: 30px;
-    font-size: xx-large;
-    width: 50px;
-    height: 50px;
-    transition: background-color 0.5s ease-out;
+  border-color: red;
+  background-color: transparent;
+  border-width: 5px;
+  border-radius: 30px;
+  font-size: xx-large;
+  width: 50px;
+  height: 50px;
+  transition: background-color 0.5s ease-out;
 }
 .redhover:hover {
-    background-color: lightcoral;
+  background-color: lightcoral;
 }
 
-#menu{width: 100%; height: 100px; border-radius: 25px; display: flex; position: relative;}
+#menu {
+  width: 100%;
+  height: 100px;
+  border-radius: 25px;
+  display: flex;
+  position: relative;
+}
 @media (max-width: 767px) {
-    
-    #startmsg{width: 100%;}
+  #startmsg {
+    width: 100%;
   }
-  @media (min-width:768px) {
-    #menu{width: 100%;}
-    #startmsg{width: 500px;}
+}
+@media (min-width: 768px) {
+  #menu {
+    width: 100%;
   }
-  
-#pagebody{
-    margin-top: 30px;
-    margin-left: 15px;
+  #startmsg {
+    width: 500px;
+  }
 }
 
-#profiles a{
-    color:red;
+#pagebody {
+  margin-top: 30px;
+  margin-left: 15px;
 }
-#profiles a svg{
-    height:60px;
+
+#profiles a {
+  color: red;
 }
-    
+#profiles a svg {
+  height: 60px;
+}
