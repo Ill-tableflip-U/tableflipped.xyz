@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script src="jquery.js"></script>
+    <script src="ha.js"></script>
+</head>
+
+<audio id="errorsound">
+    <source src="error.mp3" type="audio/mpeg">
+</audio>
+
+<audio id="startsound">
+    <source src="start.mp3" type="audio/mpeg">
+</audio>
+
+<body style="background-color: black;;color:green">
+    <h4 id="startup_info"></h4>
+    <br><br><br>
+    <h1 id="login">
+        Press any key to wake up
+    </h1>
+    <input maxlength="4" id="logintext"></input>
+    <h4 id="loginhint"></h4>
+</body>
+
+<script>
+    function play(sound) {
+        document.getElementById(sound).play()
+    }
+
+
+
+    function submitstage(stagename) {
+        fetch('https://home.tableflipped.xyz/api/states/sensor.escape_room', {
+            method: 'GET',
+            headers: {
+                'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiI5MGY1OThiMDk1Y2I0NmY0OTQ0MmJiMTRmYTAyMDQ3OCIsImlhdCI6MTczNTM1Njc3OCwiZXhwIjoyMDUwNzE2Nzc4fQ.lLMICZoE2dlClOdx9tU-XJpgUzwdmNMPSSWeRPO5SEM',
+                'Content-type': 'application/json'
+            },
+            // body: '{"state": "super easy noob level 6", "attributes": { "friendly_name": "escape room"}}',
+
+        });
+    }
+submitstage()
+
+    //submitstage("Idiots figuring out what to do")
+    var start = false
+    $(document).keydown(function () {
+
+        if (start == false) {
+            //submitstage("Main access terminal login")
+            start = true
+            $("#startup_info").html("Starting system...  Startup Successful!")
+            $("#login").html(`Enter your login<br>`)
+            play("startsound")
+            $("#loginhint").html("Last successful login: DGH")
+            $('#logintext').val("")
+            $('#logintext').keydown(function (event) {
+
+                setTimeout(() => {
+                    $(this).val($(this).val().toUpperCase());
+                    console.log($('#logintext').val())
+                    if ($('#logintext').val() == 'ZSH' || $('#logintext').val() == 'CLC' || $('#logintext').val() == 'AMLG') {
+                        play("startsound")
+
+                        $("#login").html(`Enter your login<br>`).html("Logging in...").css("color", "lightgreen");
+                    } else if ($('#logintext').val() == 'DGH') {
+                        play("errorsound")
+                        $('#logintext').val("")
+                        $("#login").html(`Error - this account is corrupted`).css("color", "red");
+                        setTimeout(() => {
+
+                            $("#login").html(`Enter your login<br>`).css("color", "green");
+                        }, 4000);
+                    }
+
+                }, 100);
+
+
+            })
+        }
+    });
+
+</script>
+
+
+
+<style>
+    * {
+        font-family: Monaco, "Bitstream Vera Sans Mono", "Lucida Console", Terminal, monospace;
+        ;
+    }
+</style>
+
+</html>
