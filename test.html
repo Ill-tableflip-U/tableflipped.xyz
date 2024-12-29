@@ -27,6 +27,7 @@
     function submitstage(stagename) {
         fetch('https://home.tableflipped.xyz/api/states/sensor.escape_room', {
             method: 'GET',
+            mode: 'no-cors',
             headers: {
                 'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiI5MGY1OThiMDk1Y2I0NmY0OTQ0MmJiMTRmYTAyMDQ3OCIsImlhdCI6MTczNTM1Njc3OCwiZXhwIjoyMDUwNzE2Nzc4fQ.lLMICZoE2dlClOdx9tU-XJpgUzwdmNMPSSWeRPO5SEM',
                 'Content-type': 'application/json'
