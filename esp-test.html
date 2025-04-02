@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>WebSocket Example</title>
+</head>
+<body>
+    <h1>WebSocket Connection</h1>
+    <div id="messages"></div>
+    <input type="text" id="messageInput">
+    <button id="sendButton">Send</button>
+
+    <script>
+        // Replace with your WebSocket server URL.
+        const ws = new WebSocket("ws://app.tableflipped.xyz/ws");
+
+        const messagesDiv = document.getElementById("messages");
+        const messageInput = document.getElementById("messageInput");
+        const sendButton = document.getElementById("sendButton");
+
+        ws.onopen = () => {
+            console.log("WebSocket connection established.");
+            messagesDiv.innerHTML += "<p>WebSocket connection established.</p>";
+        };
+
+        ws.onmessage = (event) => {
+            console.log("Received message:", event.data);
+            messagesDiv.innerHTML += `<p>Received: ${event.data}</p>`;
+        };
+
+        ws.onclose = () => {
+            console.log("WebSocket connection closed.");
+            messagesDiv.innerHTML += "<p>WebSocket connection closed.</p>";
+        };
+
+        ws.onerror = (error) => {
+            console.error("WebSocket error:", error);
+            messagesDiv.innerHTML += `<p>WebSocket error: ${error}</p>`;
+        };
+
+        sendButton.onclick = () => {
+            const message = messageInput.value;
+            if (ws.readyState === WebSocket.OPEN) {
+                ws.send(message);
+                messagesDiv.innerHTML += `<p>Sent: ${message}</p>`;
+                messageInput.value = ""; // Clear the input field
+            } else {
+                console.error("WebSocket connection is not open.");
+                messagesDiv.innerHTML += "<p>WebSocket connection is not open.</p>";
+            }
+        };
+
+    </script>
+</body>
+</html>
