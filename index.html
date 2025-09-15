@@ -130,7 +130,7 @@
             }
         }
         let socials = urlParams.get('flags');
-        if(socials=="ns"||$.cookie("nosocials")==true){
+        if(socials=="ns"||$.cookie("nosocials")=="true"){
             $.cookie("nosocials", true)
             document.querySelector("#profiles").style.display = "none";
         }
@@ -139,6 +139,7 @@
     </script>
 </body>
 </html>
+
 
 
 
