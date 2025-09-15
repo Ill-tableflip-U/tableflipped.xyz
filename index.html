@@ -112,8 +112,8 @@
         });
         const queryString = window.location.search;
         const urlParams = new URLSearchParams(queryString);
+        let p = urlParams.get('project');
         if(p){
-            let p = urlParams.get('project');
             if (!p.includes(".")) { p += ".html" }
             if (p) {
                 $.get(`/${p}`, function (project) {
@@ -137,5 +137,6 @@
     </script>
 </body>
 </html>
+
 
 
