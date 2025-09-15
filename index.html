@@ -130,13 +130,16 @@
             }
         }
         let socials = urlParams.get('flags');
-        if(socials=="ns"){
+        if(socials=="ns"||$.cookie("nosocials")){
+            $.cookie("nosocials", true)
             document.querySelector("#profiles").style.display = "none";
         }
+        
 
     </script>
 </body>
 </html>
+
 
 
 
