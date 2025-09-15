@@ -127,8 +127,12 @@
                 refresh_theme()
             })
         }
-
+        let socials = urlParams.get('flags');
+        if(socials=="ns"){
+            document.QuerySelector("#profiles").style.display = "none";
+        }
 
     </script>
 </body>
 </html>
+
