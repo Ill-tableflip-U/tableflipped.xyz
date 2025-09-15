@@ -112,20 +112,22 @@
         });
         const queryString = window.location.search;
         const urlParams = new URLSearchParams(queryString);
-        let p = urlParams.get('project');
-        if (!p.includes(".")) { p += ".html" }
-        if (p) {
-            $.get(`/${p}`, function (project) {
-
-                $('#pagebody').html(project)
-                let e_index = p.indexOf('.')
-                if (e_index !== -1) {
-                    $("title").html(p.substring(0, e_index))
-                } else {
-                    $("title").html(inputString)
-                }
-                refresh_theme()
-            })
+        if(p){
+            let p = urlParams.get('project');
+            if (!p.includes(".")) { p += ".html" }
+            if (p) {
+                $.get(`/${p}`, function (project) {
+    
+                    $('#pagebody').html(project)
+                    let e_index = p.indexOf('.')
+                    if (e_index !== -1) {
+                        $("title").html(p.substring(0, e_index))
+                    } else {
+                        $("title").html(inputString)
+                    }
+                    refresh_theme()
+                })
+            }
         }
         let socials = urlParams.get('flags');
         if(socials=="ns"){
@@ -135,4 +137,5 @@
     </script>
 </body>
 </html>
+
 
